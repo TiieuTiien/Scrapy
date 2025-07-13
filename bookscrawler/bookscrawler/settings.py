@@ -14,6 +14,10 @@ NEWSPIDER_MODULE = "bookscrawler.spiders"
 
 ADDONS = {}
 
+FEEDS = {
+    'booksdata.json': {'format': 'json'}
+}
+
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = "bookscrawler (+http://www.yourdomain.com)"
@@ -60,6 +64,7 @@ DOWNLOAD_DELAY = 1
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    "bookscrawler.pipelines.BookscrawlerPipeline": 300,
+   "bookscrawler.pipelines.SaveToMySQLPipLine": 400,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
