@@ -1,5 +1,6 @@
 import scrapy
 from bookscrawler.items import BookItem
+import random
 
 class BookspiderSpider(scrapy.Spider):
     name = "bookspider"
@@ -32,7 +33,7 @@ class BookspiderSpider(scrapy.Spider):
         #         next_page_url = 'https://books.toscrape.com/' + next_page
         #     else:
         #         next_page_url = 'https://books.toscrape.com/catalogue/' + next_page
-        #     yield response.follow(next_page_url, callback=self.parse)
+        #     yield response.follow(next_page_url, callback=self.parse, headers={"User-Agent": self.user_agent_list[random.randint(0, len(self.user_agent_list)-1)]})
             
 
     def parse_book_page(self, response):
