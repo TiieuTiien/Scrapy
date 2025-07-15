@@ -1,4 +1,5 @@
 import scrapy
+from truyenfullcrawler.items import TruyenItem
 
 
 class TruyenfullSpider(scrapy.Spider):
@@ -8,16 +9,23 @@ class TruyenfullSpider(scrapy.Spider):
     counter = 0
 
     def parse(self, response):
-        truyen = response.css('.col-xs-12')
-
-        yield {
-            'title': truyen.css('.chapter-title::attr(title)').get(),
-            'content': truyen.css('.chapter-c p::text').getall(),
-        }
+        # Extract content on current page
+        yield from self.parse_chapter(response)
         
+        # Follow to next chapter
         next_chap = response.css('#next_chap::attr(href)').get()
-
-        if next_chap is not None and self.counter < 5:
+        
+        if next_chap is not None and self.counter < 3:
             self.counter += 1
             print(f"Following to next chapter: {next_chap}")
+            print()
             yield response.follow(next_chap, callback=self.parse)
+
+    def parse_chapter(self, response):
+        """Dedicated callback for parsing chapter content"""
+        truyen_item = TruyenItem()
+        truyen_item['title'] = response.css('.chapter-title::attr(title)').get()
+        truyen_item['content'] = response.css('.chapter-c p::text').getall()
+        
+        print(f"Parsing chapter: {truyen_item['title']}")
+        yield truyen_item

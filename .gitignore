@@ -1,2 +1,5 @@
 .scrapy.venv
 __pycache__/
+truyenfull.json
+.env
+key.py

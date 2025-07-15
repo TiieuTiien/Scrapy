@@ -18,7 +18,13 @@ FEEDS = {
     'booksdata.json': {'format': 'json'}
 }
 
-SCRAPEOPS_API_KEY = '421c7604-6158-4707-b4be-d1050aa19096'
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+ROTATING_PROXY_LIST = os.getenv('ROTATING_PROXY_LIST', '').split(',')
+
+SCRAPEOPS_API_KEY = os.getenv('SCRAPEOPS_API_KEY')
 SCRAPEOPS_FAKE_USER_AGENT_ENDPOINT = 'https://headers.scrapeops.io/v1/user-agents'
 SCRAPEOPS_FAKE_USER_AGENT_ENABLED = True
 SCRAPEOPS_NUM_RESULTS = 5
