@@ -1,3 +1,6 @@
 ipython==9.4.0
 Scrapy==2.13.3
 requests==2.32.4
+brotli==1.1.0
+scrapy-rotating-proxies==0.6.2
+zstandard==0.23.0

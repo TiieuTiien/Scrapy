@@ -1,4 +1,4 @@
-# Scrapy settings for bookscrawler project
+# Scrapy settings for truyenfullcrawler project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,27 +7,21 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = "bookscrawler"
+BOT_NAME = "truyenfullcrawler"
 
-SPIDER_MODULES = ["bookscrawler.spiders"]
-NEWSPIDER_MODULE = "bookscrawler.spiders"
+SPIDER_MODULES = ["truyenfullcrawler.spiders"]
+NEWSPIDER_MODULE = "truyenfullcrawler.spiders"
 
 ADDONS = {}
-
-FEEDS = {
-    'booksdata.json': {'format': 'json'}
-}
 
 SCRAPEOPS_API_KEY = '421c7604-6158-4707-b4be-d1050aa19096'
 SCRAPEOPS_FAKE_USER_AGENT_ENDPOINT = 'https://headers.scrapeops.io/v1/user-agents'
 SCRAPEOPS_FAKE_USER_AGENT_ENABLED = True
 SCRAPEOPS_NUM_RESULTS = 5
 
-# SCRAPEOPS_FAKE_BROWSER_HEADER_ENDPOINT = 'https://headers.scrapeops.io/v1/browser-headers'
-# SCRAPEOPS_FAKE_BROWSER_HEADER_ENABLED = True
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = "bookscrawler (+http://www.yourdomain.com)"
+#USER_AGENT = "truyenfullcrawler (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -52,16 +46,15 @@ DOWNLOAD_DELAY = 1
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    "bookscrawler.middlewares.BookscrawlerSpiderMiddleware": 543,
+#    "truyenfullcrawler.middlewares.TruyenfullcrawlerSpiderMiddleware": 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-#    "bookscrawler.middlewares.ScrapeOpsFakeUserAgentMiddleware": 400,
-   "bookscrawler.middlewares.ScrapeOpsFakeBrowserHeaderAgentMiddleware": 400,
-#    "rotating_proxies.middlewares.RotatingProxyMiddleware": 610,
-#    "rotating_proxies.middlewares.BanDetectionMiddleware": 620,
+   "truyenfullcrawler.middlewares.ScrapeOpsFakeBrowserHeaderAgentMiddleware": 543,
+   "rotating_proxies.middlewares.RotatingProxyMiddleware": 610,
+   "rotating_proxies.middlewares.BanDetectionMiddleware": 620,
 }
 
 # Enable or disable extensions
@@ -72,10 +65,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-   "bookscrawler.pipelines.BookscrawlerPipeline": 300,
-   "bookscrawler.pipelines.SaveToMySQLPipLine": 400,
-}
+#ITEM_PIPELINES = {
+#    "truyenfullcrawler.pipelines.TruyenfullcrawlerPipeline": 300,
+#}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -100,3 +92,12 @@ ITEM_PIPELINES = {
 
 # Set settings whose default value is deprecated to a future-proof value
 FEED_EXPORT_ENCODING = "utf-8"
+
+# Configure feed exports
+FEEDS = {
+    'truyenfull.json': {
+        'format': 'json',
+        'overwrite': True
+    },
+}
+
